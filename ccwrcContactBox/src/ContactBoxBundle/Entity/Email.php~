@@ -5,12 +5,12 @@ namespace ContactBoxBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Phone
+ * Email
  *
- * @ORM\Table(name="phone")
- * @ORM\Entity(repositoryClass="ContactBoxBundle\Repository\PhoneRepository")
+ * @ORM\Table(name="email")
+ * @ORM\Entity(repositoryClass="ContactBoxBundle\Repository\EmailRepository")
  */
-class Phone
+class Email
 {
     /**
      * @var int
@@ -24,19 +24,19 @@ class Phone
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string", length=100)
+     * @ORM\Column(name="address", type="string", length=255)
      */
-    private $number;
+    private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=100)
+     * @ORM\Column(name="type", type="string", length=50)
      */
     private $type;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Person", inversedBy="phones")
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="emails")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=false)
      */
     private $person;
@@ -53,33 +53,33 @@ class Phone
     }
 
     /**
-     * Set number
+     * Set address
      *
-     * @param string $number
-     * @return Phone
+     * @param string $address
+     * @return Email
      */
-    public function setNumber($number)
+    public function setAddress($address)
     {
-        $this->number = $number;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get number
+     * Get address
      *
      * @return string 
      */
-    public function getNumber()
+    public function getAddress()
     {
-        return $this->number;
+        return $this->address;
     }
 
     /**
      * Set type
      *
      * @param string $type
-     * @return Phone
+     * @return Email
      */
     public function setType($type)
     {
@@ -96,28 +96,5 @@ class Phone
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set person
-     *
-     * @param \ContactBoxBundle\Entity\Person $person
-     * @return Phone
-     */
-    public function setPerson(\ContactBoxBundle\Entity\Person $person)
-    {
-        $this->person = $person;
-
-        return $this;
-    }
-
-    /**
-     * Get person
-     *
-     * @return \ContactBoxBundle\Entity\Person 
-     */
-    public function getPerson()
-    {
-        return $this->person;
     }
 }

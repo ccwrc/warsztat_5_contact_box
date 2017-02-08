@@ -34,6 +34,12 @@ class Email
      * @ORM\Column(name="type", type="string", length=50)
      */
     private $type;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="emails")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=false)
+     */
+    private $person;
 
 
     /**
@@ -90,5 +96,28 @@ class Email
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set person
+     *
+     * @param \ContactBoxBundle\Entity\Person $person
+     * @return Email
+     */
+    public function setPerson(\ContactBoxBundle\Entity\Person $person)
+    {
+        $this->person = $person;
+
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \ContactBoxBundle\Entity\Person 
+     */
+    public function getPerson()
+    {
+        return $this->person;
     }
 }
