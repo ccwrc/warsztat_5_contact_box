@@ -13,8 +13,16 @@ use ContactBoxBundle\Entity\Address;
 use ContactBoxBundle\Entity\Email;
 use ContactBoxBundle\Entity\Phone;
 
-class PersonController extends Controller
-{
+class PersonController extends Controller {
+    
+    /**
+     * @Route("/")
+     */
+    public function startAction() {
+        // czasowo, planowana grafika powitalna
+        return $this->redirectToRoute("contactbox_person_showallpersons");
+    }
+    
     /**
      * @Route("/index")
      */
