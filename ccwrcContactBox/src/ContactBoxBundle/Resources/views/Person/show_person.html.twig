@@ -3,7 +3,7 @@
 {% block title %}ContactBoxBundle:Person:showPerson{% endblock %}
 
 {% block body %} 
-    
+
     <div class='container'>
         <h3>Skrzynka: detale {{ person.name }} {{ person.surname }} </h3>
 
@@ -15,7 +15,7 @@
             Opis: {{ person.description }} <br/><br/>
 
             <h4>Telefony:</h4>
-            {% for phone in person.phones %} {# if per.fon length >0 #}
+            {% for phone in person.phones %} {# ew. można: if per.fon length >0 #}
                 telefon: {{ phone.number }}  
                 ({{ phone.type }}) <br/>
             {% else %}
@@ -23,7 +23,7 @@
             {% endfor %}
 
             <h4>Maile:</h4>
-            {% for email in person.emails %} {# if per.fon length >0 #}
+            {% for email in person.emails %} 
                 mail: {{ email.address }}  
                 ({{ email.type }}) <br/>
             {% else %}
@@ -31,7 +31,7 @@
             {% endfor %}
 
             <h4>Adresy:</h4>
-            {% for address in person.addresses %} {# if per.fon length >0 #}
+            {% for address in person.addresses %} 
                 Miasto: {{ address.city }} 
                 Ulica: {{ address.street }} <br>
                 Numer domu: {{ address.houseNumber }} 

@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}ContactBoxBundle:Person:addPerson{% endblock %}
+
+{% block body %} 
+    <div class='container'>
+        <h3>Skrzynka: dodaj nową osobę </h3>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
