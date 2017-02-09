@@ -17,7 +17,13 @@
         {% endblock %}
     </head>
     <body>
-    {% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+        {% block body %}
+            {% block menu %} 
+                <a href='{{ path("contactbox_person_index") }}' ><button class="btn btn-small">Strona główna</button> </a>
+                <a href='{{ path("contactbox_person_showallpersons") }}' ><button class="btn btn-small">Pokaż wszystko</button> </a>
+                <a href='{{ path("contactbox_person_addperson") }}' ><button class="btn btn-small">Dodaj kontakt</button> </a>
+            {% endblock %}
+        {% endblock %}
+    {% block javascripts %}{% endblock %}
 </body>
 </html>

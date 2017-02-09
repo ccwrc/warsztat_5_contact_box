@@ -93,7 +93,8 @@ class PersonController extends Controller {
      */
     public function showAllPersonsAction() {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
-        $persons = $repo->findAll();
+        // $persons = $repo->findAll();
+        $persons = $repo->findBy([], ["surname" => "ASC"]);
 
         if ($persons == null) {
             throw $this->createNotFoundException("Brak osób w bazie");

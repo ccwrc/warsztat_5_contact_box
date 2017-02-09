@@ -3,13 +3,16 @@
 {% block title %}ContactBoxBundle:Person:editPerson{% endblock %}
 
 {% block body %} 
-    <div class='input-group-addon'>
-        
-        <h3>Skrzynka: edycja </h3>
+    <div class="container">
+        {{ parent() }}
+        <div class='input-group-addon'>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+            <h3>Skrzynka: edycja </h3>
 
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+
+        </div>
     </div>
 {% endblock %}

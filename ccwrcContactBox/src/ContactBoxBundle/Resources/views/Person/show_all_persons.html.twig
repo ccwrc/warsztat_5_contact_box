@@ -3,7 +3,8 @@
 {% block title %}ContactBoxBundle:Person:showAllPersons{% endblock %}
 
 {% block body %} 
-    <div class='container'>
+    <div class='container'>     
+        {{ parent() }}     
         <h3>Skrzynka: pokaż wszystkie</h3>
 
         Liczba osób w skrzynce kontaktowej: {{ persons | length }}
