@@ -12,8 +12,8 @@ class PersonController extends Controller
     /**
      * @Route("/index")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
+        
         return $this->render('ContactBoxBundle:Person:index.html.twig', array(
             // ...
         ));
@@ -40,12 +40,14 @@ class PersonController extends Controller
     }
 
     /**
-     * @Route("/showPerson")
+     * @Route("/showPerson/{id}")
      */
-    public function showPersonAction()
-    {
+    public function showPersonAction($id) {
+        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
+        $person = $repo->find($id);
+        
         return $this->render('ContactBoxBundle:Person:show_person.html.twig', array(
-            // ...
+            "person" => $person
         ));
     }
 

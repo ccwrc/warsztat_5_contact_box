@@ -2,6 +2,43 @@
 
 {% block title %}ContactBoxBundle:Person:showPerson{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Person:showPerson page</h1>
+{% block body %} 
+    
+    <div class='container'>
+        <h3>Skrzynka: detale {{ person.name }} {{ person.surname }} </h3>
+
+        <div class='col-md-12'>
+
+            L.P.: {{ person.id }} <br/>
+            Imię: {{ person.name }} <br>
+            Nazwisko: {{ person.surname }} <br/>
+            Opis: {{ person.description }} <br/><br/>
+
+            <h4>Telefony:</h4>
+            {% for phone in person.phones %} {# if per.fon length >0 #}
+                telefon: {{ phone.number }}  
+                ({{ phone.type }}) <br/>
+            {% else %}
+                Brak telefonów
+            {% endfor %}
+
+            <h4>Maile:</h4>
+            {% for email in person.emails %} {# if per.fon length >0 #}
+                mail: {{ email.address }}  
+                ({{ email.type }}) <br/>
+            {% else %}
+                Brak maili
+            {% endfor %}
+
+            <h4>Adresy:</h4>
+            {% for address in person.addresses %} {# if per.fon length >0 #}
+                Miasto: {{ address.city }} 
+                Ulica: {{ address.street }} <br>
+                Numer domu: {{ address.houseNumber }} 
+                Numer mieszkania: {{ address.flatNumber }} <br/><br/>
+            {% else %}
+                Brak adresów
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
