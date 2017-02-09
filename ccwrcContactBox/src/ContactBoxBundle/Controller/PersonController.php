@@ -18,38 +18,57 @@ class PersonController extends Controller {
     /**
      * @Route("/")
      */
-    public function startAction() {
+    public function indexAction() {
         // czasowo, planowana grafika powitalna
         return $this->redirectToRoute("contactbox_person_showallpersons");
     }
-    
+
     /**
-     * @Route("/index")
+     * @Route("/deletePerson/{id}", requirements={"id"="\d+"})
      */
-    public function indexAction() {
+    public function deletePersonAction(request $req, $id) {
+        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
+        $person = $repo->find($id);
+
+        if ($person == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
+        //TODO zmienic na DQL i sprawdzic/porownac efektywnosc
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($person);
+        $em->flush();
         
-        return $this->render('ContactBoxBundle:Person:index.html.twig', array(
-            // ...
-        ));
+        return $this->redirectToRoute("contactbox_person_showallpersons");
     }
 
     /**
-     * @Route("/deletePerson")
+     * @Route("/editPerson/{id}", requirements={"id"="\d+"})
      */
-    public function deletePersonAction()
-    {
-        return $this->render('ContactBoxBundle:Person:delete_person.html.twig', array(
-            // ...
-        ));
-    }
+    public function editPersonAction(Request $req, $id) {
+        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
+        $person = $repo->find($id);
 
-    /**
-     * @Route("/editPerson")
-     */
-    public function editPersonAction()
-    {
+        if ($person == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $form = $this->createFormBuilder($person)
+                ->add("name", "text", ["label" => "Podaj imię: "])
+                ->add("surname", "text", ["label" => "Podaj nazwisko: "])
+                ->add("description", "textarea", ["label" => "Wpisz opis: "])
+                ->add("save", "submit", ["label" => "Zapisz nowe dane"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted()) {
+            $person = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute("contactbox_person_showallpersons");
+        }
+
         return $this->render('ContactBoxBundle:Person:edit_person.html.twig', array(
-            // ...
+                    "form" => $form->createView()
         ));
     }
 
