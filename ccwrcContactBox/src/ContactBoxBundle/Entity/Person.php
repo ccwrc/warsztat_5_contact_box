@@ -45,7 +45,7 @@ class Person
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=400)
+     * @ORM\Column(name="photo", type="string", length=400, nullable=true)
      */
     private $photo;
     

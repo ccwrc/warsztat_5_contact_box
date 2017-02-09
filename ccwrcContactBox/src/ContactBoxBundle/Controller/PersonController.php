@@ -83,14 +83,20 @@ class PersonController extends Controller
     public function addPersonAction(Request $req) {
         $person = new Person();
         $form = $this->createFormBuilder($person)
-                ->add("name", "text")
-                ->add("surname", "text")
-                ->add("description", "textarea")
-                ->add("Dodaj", "submit")
+                ->add("name", "text", ["label" => "Podaj imię: "])
+                ->add("surname", "text", ["label" => "Podaj nazwisko: "])
+                ->add("description", "textarea", ["label" => "Wpisz opis: "])
+                ->add("save", "submit", ["label" => "Kliknij żeby dodać"])
                 ->getForm();
 
         $form->handleRequest($req);
-        //
+        if ($form->isSubmitted()) {
+            $person = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+            return $this->redirectToRoute("contactbox_person_showperson", ["id" => $person->getId()]);
+        }
 
         return $this->render('ContactBoxBundle:Person:add_person.html.twig', array(
                     "form" => $form->createView()

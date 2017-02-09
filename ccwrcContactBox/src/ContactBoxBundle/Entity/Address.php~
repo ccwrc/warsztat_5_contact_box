@@ -157,4 +157,27 @@ class Address
     {
         return $this->flatNumber;
     }
+
+    /**
+     * Set person
+     *
+     * @param \ContactBoxBundle\Entity\Person $person
+     * @return Address
+     */
+    public function setPerson(\ContactBoxBundle\Entity\Person $person)
+    {
+        $this->person = $person;
+
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \ContactBoxBundle\Entity\Person 
+     */
+    public function getPerson()
+    {
+        return $this->person;
+    }
 }
