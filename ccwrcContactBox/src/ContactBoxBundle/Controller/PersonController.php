@@ -95,7 +95,9 @@ class PersonController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
-            return $this->redirectToRoute("contactbox_person_showperson", ["id" => $person->getId()]);
+            return $this->redirectToRoute("contactbox_person_showperson", [
+                        "id" => $person->getId()
+            ]);
         }
 
         return $this->render('ContactBoxBundle:Person:add_person.html.twig', array(
