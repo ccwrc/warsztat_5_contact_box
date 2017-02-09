@@ -2,6 +2,31 @@
 
 {% block title %}ContactBoxBundle:Person:showAllPersons{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Person:showAllPersons page</h1>
+{% block body %} <div class='container'>
+        <h3>Skrzynka: pokaż wszystkie</h3>
+
+        Liczba osób w skrzynce kontaktowej: {{ persons | length }}
+
+        <table class="table">
+
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>surname</th>
+                <th>description</th>
+                <th>akcje</th>
+            </tr>
+            {% for person in persons %}
+                <tr> <td>{{ person.id }} </td>
+                    <td>  {{ person.name }} </td>
+                    <td> {{ person.surname }} </td>
+                    <td> {{ person.description }} </td>
+                    {# <td> <a href='{{ path("box_person_showperson", {"id": person.id}) }}' ><button class="btn btn-small">link do osoby</button> </a> </td> #}
+                </tr>
+            {% else %}
+                brak osób w bazie.
+            {% endfor %}
+        </table>
+
+    </div>
 {% endblock %}

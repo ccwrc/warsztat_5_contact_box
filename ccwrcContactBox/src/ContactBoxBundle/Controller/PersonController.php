@@ -5,6 +5,8 @@ namespace ContactBoxBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+use ContactBoxBundle\Entity\Person;
+
 class PersonController extends Controller
 {
     /**
@@ -50,10 +52,12 @@ class PersonController extends Controller
     /**
      * @Route("/showAllPersons")
      */
-    public function showAllPersonsAction()
-    {
+    public function showAllPersonsAction() {
+        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
+        $persons = $repo->findAll();
+        
         return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
-            // ...
+            "persons" => $persons
         ));
     }
 
