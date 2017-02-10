@@ -23,9 +23,16 @@
             <h4>Telefony:</h4>
             {% for phone in person.phones %} {# ew. można: if per.fon length >0 #}
                 {{ phone.number }}  ({{ phone.type }}) 
+                <a href='{{ path("contactbox_phone_editphone", {"id": person.id, "phoneId": phone.id}) }}' >
+                    <button class="btn btn-default btn-xs dropdown-toggle">Edytuj</button> </a>
+                <a href='{{ path("contactbox_phone_deletephone", {"id": person.id, "phoneId": phone.id}) }}' >
+                    <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
+                <br/>
             {% else %}
                 Brak telefonów
             {% endfor %}
+            <a href='{{ path("contactbox_phone_addphone", {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Dodaj telefon</button> </a>
 
             <h4>Maile:</h4>
             {% for email in person.emails %} 

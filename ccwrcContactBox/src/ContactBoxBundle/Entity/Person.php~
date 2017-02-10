@@ -50,17 +50,17 @@ class Person
     private $photo;
     
     /**
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="person", cascade={"persist"}) 
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="person", cascade={"remove"}) 
      */
     private $addresses;
     
     /**
-     * @ORM\OneToMany(targetEntity="Email", mappedBy="person", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Email", mappedBy="person", cascade={"remove"})
      */
     private $emails;
     
     /**
-     * @ORM\OneToMany(targetEntity="Phone", mappedBy="person", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Phone", mappedBy="person", cascade={"remove"})
      */
     private $phones;
 

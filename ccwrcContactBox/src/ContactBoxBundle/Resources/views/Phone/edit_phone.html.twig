@@ -2,6 +2,14 @@
 
 {% block title %}ContactBoxBundle:Phone:editPhone{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Phone:editPhone page</h1>
+{% block body %} 
+    <div class="container">
+        {{ parent() }}   
+        <h3>{{ person.surname }} {{ person.name }} - edycja telefonu </h3>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <div/>
 {% endblock %}

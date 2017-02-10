@@ -67,7 +67,7 @@ class EmailController extends Controller
     }
 
     /**
-     * @Route("/{id}/{emailId}/editEmail", requirements={"id"="\d+", "addressId"="\d+"})
+     * @Route("/{id}/{emailId}/editEmail", requirements={"id"="\d+", "emailId"="\d+"})
      */
     public function editEmailAction(Request $req, $id, $emailId) {
         $em = $this->getDoctrine()->getManager();
