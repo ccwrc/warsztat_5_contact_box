@@ -20,6 +20,10 @@ class AddressController extends Controller {
         $address = new Address();
         $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
 
+        if ($person == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
+
         $form = $this->createFormBuilder($address)
                 ->setMethod("POST")
                 ->add("city", "text", ["label" => "Podaj miasto: "])

@@ -22,31 +22,36 @@
 
             <h4>Telefony:</h4>
             {% for phone in person.phones %} {# ew. można: if per.fon length >0 #}
-                telefon: {{ phone.number }}  
-                ({{ phone.type }}) <br/>
+                {{ phone.number }}  ({{ phone.type }}) 
             {% else %}
                 Brak telefonów
             {% endfor %}
 
             <h4>Maile:</h4>
             {% for email in person.emails %} 
-                mail: {{ email.address }}  
-                ({{ email.type }}) <br/>
+                {{ email.address }}  ({{ email.type }})  
+                <a href='{{ path("contactbox_email_editemail", {"id": person.id, "emailId": email.id}) }}' >
+                    <button class="btn btn-default btn-xs dropdown-toggle">Edytuj</button> </a>
+                <a href='{{ path("contactbox_email_deleteemail", {"id": person.id, "emailId": email.id}) }}' >
+                    <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
+                <br/>
             {% else %}
                 Brak maili
             {% endfor %}
+            <a href='{{ path("contactbox_email_addemail", {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Dodaj e-mail</button> </a>
 
             <h4>Adresy:</h4>
             {% for address in person.addresses %} 
                 Miasto: {{ address.city }} 
                 Ulica: {{ address.street }} <br>
                 Numer domu: {{ address.houseNumber }} 
-                Numer mieszkania: {{ address.flatNumber }} <br/>
+                Numer mieszkania: {{ address.flatNumber }}  
                 <a href='{{ path("contactbox_address_editaddress", {"id": person.id, "addressId": address.id}) }}' >
                     <button class="btn btn-default btn-xs dropdown-toggle">Edytuj</button> </a>
                 <a href='{{ path("contactbox_address_deleteaddress", {"id": person.id, "addressId": address.id}) }}' >
                     <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
-                <br/><br/>
+                <br/>
             {% else %}
                 Brak adresów
             {% endfor %}
