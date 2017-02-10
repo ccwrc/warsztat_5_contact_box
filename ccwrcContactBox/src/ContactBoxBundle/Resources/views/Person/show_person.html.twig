@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "ContactBoxBundle:Person:base.html.twig" %}
 
 {% block title %}ContactBoxBundle:Person:showPerson{% endblock %}
 
@@ -14,7 +14,8 @@
             Imię: {{ person.name }} <br>
             Nazwisko: {{ person.surname }} <br/>
             Opis: {{ person.description }} <br/> {# btn btn-small #}
-            <a href='{{ path("contactbox_person_editperson", {"id": person.id}) }}' ><button class="btn btn-default btn-xs dropdown-toggle">Edycja</button> </a>
+            <a href='{{ path("contactbox_person_editperson", {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Edycja</button> </a>
             <br/><br/>
 
             <h4>Telefony:</h4>
