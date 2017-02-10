@@ -23,7 +23,8 @@
                     <td>  {{ person.name }} </td>
                     <td> {{ person.surname }} </td>
                     <td> {{ person.description }} </td>
-                    <td> <a href='{{ path("contactbox_person_showperson", {"id": person.id}) }}' ><button class="btn btn-small">Kliknij</button> </a> </td>
+                    <td> <a href='{{ path("contactbox_person_showperson", {"id": person.id}) }}' >
+                            <button class="btn btn-default btn-xs dropdown-toggle">Kliknij</button> </a> </td>
                 </tr>
             {% else %}
                 Brak osób w bazie.

@@ -13,7 +13,9 @@
             L.P.: {{ person.id }} <br/>
             Imię: {{ person.name }} <br>
             Nazwisko: {{ person.surname }} <br/>
-            Opis: {{ person.description }} <br/><br/>
+            Opis: {{ person.description }} <br/> {# btn btn-small #}
+            <a href='{{ path("contactbox_person_editperson", {"id": person.id}) }}' ><button class="btn btn-default btn-xs dropdown-toggle">Edycja</button> </a>
+            <br/><br/>
 
             <h4>Telefony:</h4>
             {% for phone in person.phones %} {# ew. można: if per.fon length >0 #}
