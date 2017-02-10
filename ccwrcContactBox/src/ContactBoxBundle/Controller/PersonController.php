@@ -53,6 +53,7 @@ class PersonController extends Controller {
         }
 
         $form = $this->createFormBuilder($person)
+                ->setMethod("POST")
                 ->add("name", "text", ["label" => "Podaj imię: "])
                 ->add("surname", "text", ["label" => "Podaj nazwisko: "])
                 ->add("description", "textarea", ["label" => "Wpisz opis: "])
@@ -60,7 +61,7 @@ class PersonController extends Controller {
                 ->getForm();
 
         $form->handleRequest($req);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $person = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -111,6 +112,7 @@ class PersonController extends Controller {
     public function addPersonAction(Request $req) {
         $person = new Person();
         $form = $this->createFormBuilder($person)
+                ->setMethod("POST")
                 ->add("name", "text", ["label" => "Podaj imię: "])
                 ->add("surname", "text", ["label" => "Podaj nazwisko: "])
                 ->add("description", "textarea", ["label" => "Wpisz opis: "])
@@ -118,7 +120,7 @@ class PersonController extends Controller {
                 ->getForm();
 
         $form->handleRequest($req);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $person = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
