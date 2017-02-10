@@ -3,13 +3,13 @@
 {% block title %}ContactBoxBundle:Person:addPerson{% endblock %}
 
 {% block body %} 
-    <div class='input-group-addon'>
-        
-        <h3>Skrzynka: dodaj nową osobę </h3>
+    <div class="container">
+        {{ parent() }}   
+        <h3>Dodaj nową osobę </h3>
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_end(form) }}
 
-    </div>
+        <div/>
 {% endblock %}

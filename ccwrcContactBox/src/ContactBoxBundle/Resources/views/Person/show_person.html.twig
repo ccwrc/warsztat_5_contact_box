@@ -6,7 +6,7 @@
 
     <div class='container'>
         {{ parent() }}
-        <h3>Skrzynka: detale {{ person.name }} {{ person.surname }} </h3>
+        <h3>Detale: {{ person.name }} {{ person.surname }} </h3>
 
         <div class='col-md-12'>
 
@@ -16,6 +16,8 @@
             Opis: {{ person.description }} <br/> {# btn btn-small #}
             <a href='{{ path("contactbox_person_editperson", {"id": person.id}) }}' >
                 <button class="btn btn-default btn-xs dropdown-toggle">Edycja</button> </a>
+            <a href='{{ path("contactbox_person_deleteperson", {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
             <br/><br/>
 
             <h4>Telefony:</h4>
@@ -39,10 +41,18 @@
                 Miasto: {{ address.city }} 
                 Ulica: {{ address.street }} <br>
                 Numer domu: {{ address.houseNumber }} 
-                Numer mieszkania: {{ address.flatNumber }} <br/><br/>
+                Numer mieszkania: {{ address.flatNumber }} <br/>
+                <a href='{{ path("contactbox_address_editaddress", {"id": person.id, "addressId": address.id}) }}' >
+                    <button class="btn btn-default btn-xs dropdown-toggle">Edytuj</button> </a>
+                <a href='{{ path("contactbox_address_deleteaddress", {"id": person.id, "addressId": address.id}) }}' >
+                    <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
+                <br/><br/>
             {% else %}
                 Brak adresów
             {% endfor %}
+            <a href='{{ path("contactbox_address_addaddress", {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Dodaj adres</button> </a>
+
         </div>
     </div>
 {% endblock %}

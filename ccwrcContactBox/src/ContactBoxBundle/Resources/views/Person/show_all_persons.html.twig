@@ -5,9 +5,7 @@
 {% block body %} 
     <div class='container'>     
         {{ parent() }}     
-        <h3>Skrzynka: pokaż wszystkie</h3>
-
-        Liczba osób w skrzynce kontaktowej: {{ persons | length }}
+        <h3>Liczba osób w skrzynce kontaktowej: {{ persons | length }}</h3>
 
         <table class="table">
 
@@ -24,7 +22,10 @@
                     <td> {{ person.surname }} </td>
                     <td> {{ person.description }} </td>
                     <td> <a href='{{ path("contactbox_person_showperson", {"id": person.id}) }}' >
-                            <button class="btn btn-default btn-xs dropdown-toggle">Kliknij</button> </a> </td>
+                            <button class="btn btn-default btn-xs dropdown-toggle">Szczegóły</button> </a> 
+                        <a href='{{ path("contactbox_person_deleteperson", {"id": person.id}) }}' >
+                            <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
+                    </td>
                 </tr>
             {% else %}
                 Brak osób w bazie.
