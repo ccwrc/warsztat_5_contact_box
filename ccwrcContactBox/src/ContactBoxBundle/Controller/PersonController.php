@@ -24,7 +24,7 @@ class PersonController extends Controller {
     }
 
     /**
-     * @Route("/deletePerson/{id}", requirements={"id"="\d+"})
+     * @Route("/{id}/deletePerson", requirements={"id"="\d+"})
      */
     public function deletePersonAction(request $req, $id) {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
@@ -42,7 +42,7 @@ class PersonController extends Controller {
     }
 
     /**
-     * @Route("/editPerson/{id}", requirements={"id"="\d+"})
+     * @Route("/{id}/editPerson", requirements={"id"="\d+"})
      */
     public function editPersonAction(Request $req, $id) {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
@@ -73,7 +73,7 @@ class PersonController extends Controller {
     }
 
     /**
-     * @Route("/showPerson/{id}", requirements={"id"="\d+"})
+     * @Route("/{id}/showPerson", requirements={"id"="\d+"})
      */
     public function showPersonAction($id) {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
