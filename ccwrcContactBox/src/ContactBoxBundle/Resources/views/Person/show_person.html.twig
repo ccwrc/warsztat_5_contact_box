@@ -5,7 +5,7 @@
 {% block body %} 
     <div class='container'>
         {{ parent() }}
-        {{ dump(person) }}
+
         <h3>Detale: {{ person.name }} {{ person.surname }} </h3>
 
         <div class='col-md-12'>
@@ -18,8 +18,8 @@
             {% for group in person.groups %}
                 {{ group.name }} 
             {% else %}
-                Brak grup <br/>
-            {% endfor %}
+                Brak grup
+            {% endfor %} <br/>
 
             <a href='{{ path("contactbox_person_editperson", {"id": person.id}) }}' >
                 <button class="btn btn-default btn-xs dropdown-toggle">Edycja</button> </a>

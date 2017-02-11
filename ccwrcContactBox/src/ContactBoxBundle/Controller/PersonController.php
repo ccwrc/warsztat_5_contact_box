@@ -149,9 +149,9 @@ class PersonController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $findByNameOrSurname = $req->request->get("form")["name"];
-            $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE p.name = '
-                            . ':findByNameOrSurname OR p.surname = :findByNameOrSurname'
-                            . '')->setParameter('findByNameOrSurname', $findByNameOrSurname);
+            $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE p.name LIKE '
+                            . ':findByNameOrSurname OR p.surname LIKE :findByNameOrSurname'
+                            . '')->setParameter('findByNameOrSurname', "%" . $findByNameOrSurname . "%");
             $persons = $query->getResult();
 
             return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
@@ -163,5 +163,6 @@ class PersonController extends Controller {
                     "form" => $form->createView()
         ));
     }
+    
 
 }

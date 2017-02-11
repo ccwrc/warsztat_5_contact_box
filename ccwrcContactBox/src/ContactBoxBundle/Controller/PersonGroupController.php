@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\PersonGroup;
@@ -96,6 +97,40 @@ class PersonGroupController extends Controller {
         $em->flush();
 
         return $this->redirectToRoute("contactbox_persongroup_showallgroups");
+    }
+    
+    /**
+     * @Route("/{id}/{groupId}/addPersonToGroup", requirements={"id"="\d+", "groupId"="\d+"})
+     */
+    Public function addPersonToGroupAction(Request $req, $id, $groupId) {
+        $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
+        $group = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->find($groupId);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($group == null || $person == null) {
+            return $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $person->addGroup($group);
+        $em->flush();
+        return new Response("sukces");
+    }
+    
+    /**
+     * @Route("/{id}/{groupId}/deletePersonFromGroup", requirements={"id"="\d+", "groupId"="\d+"})
+     */
+    Public function deletePersonFromGroupAction(Request $req, $id, $groupId) {
+        $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
+        $group = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->find($groupId);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($group == null || $person == null) {
+            return $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $person->removeGroup($group);
+        $em->flush();
+        return new Response("sukces");
     }
 
 }
