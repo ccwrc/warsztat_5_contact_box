@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 09, 2017 at 02:44 PM
+-- Generation Time: Feb 11, 2017 at 02:09 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -40,8 +40,10 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`id`, `person_id`, `city`, `street`, `houseNumber`, `flatNumber`) VALUES
-(1, 1, 'warsaw', 'zwykły street', '22', '2'),
-(2, 1, 'katowicce', 'street katowice', '1', '234');
+(1, 1, 'warsaw po edycji', 'zwykły street po edycji', '22 po edycji', '2 po edycji'),
+(2, 1, 'katowicce', 'street katowice', '1l;l;l;ll;', '234'),
+(6, 14, 'sdfsd', 'sdfsf', 'sdfsf', 'sdfsfd'),
+(7, 13, 'Agencja', 'Universs', 'Denebola', 'DB4');
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,9 @@ CREATE TABLE `email` (
 --
 
 INSERT INTO `email` (`id`, `person_id`, `address`, `type`) VALUES
-(1, 1, 'www@w.pl', 'praca');
+(1, 1, 'www@w.pl', 'praca'),
+(2, 13, 'stellar@fox.com', 'praca'),
+(3, 13, 'letsparty@onibiza.elo', 'prywatny');
 
 -- --------------------------------------------------------
 
@@ -73,8 +77,8 @@ CREATE TABLE `person` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `photo` varchar(400) COLLATE utf8_unicode_ci NOT NULL
+  `description` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `photo` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -82,10 +86,46 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `name`, `surname`, `description`, `photo`) VALUES
-(1, 'Jan', 'Kovalski', 'opis jana', ''),
-(2, 'Jan', 'Kovalski2', 'opis jana2', ''),
+(1, 'Jan edycja', 'Kovalski edycja', 'opis jana edycji', ''),
+(2, 'Jan edit', 'edit Kovalski2', 'opis jana2 edit', ''),
 (3, 'funky', 'koval', 'opis kovala', ''),
-(4, 'funky', 'koval4', 'opis kovala4', '');
+(4, 'funky', 'koval4', 'opis kovala4', ''),
+(5, 'nowe imie', 'nowe nazwisko', 'nowy opis', NULL),
+(8, 'z imie edit1111', 'z editt1111', 'z opis edit1111', NULL),
+(10, 'valid name', 'valid surname', 'valid opis', NULL),
+(13, 'Funky', 'Koval', 'Hulaka. Pijak. Awanturnik. Licencja gwiezdnego detektywa. Spoko gość, można iść na piwo.', NULL),
+(14, 'sgrer', 'sdfsf', 'dfdfgdgf', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `persons_groups`
+--
+
+CREATE TABLE `persons_groups` (
+  `person_id` int(11) NOT NULL,
+  `person_group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `person_group`
+--
+
+CREATE TABLE `person_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `person_group`
+--
+
+INSERT INTO `person_group` (`id`, `name`) VALUES
+(1, 'Znajomi'),
+(2, 'Nowa grupa'),
+(3, 'Zawodowcy');
 
 -- --------------------------------------------------------
 
@@ -105,7 +145,10 @@ CREATE TABLE `phone` (
 --
 
 INSERT INTO `phone` (`id`, `person_id`, `number`, `type`) VALUES
-(1, 1, '9090090909090909', 'dom');
+(1, 1, '999', 'dom99'),
+(2, 13, '123456789', 'praca'),
+(3, 13, '987654321', 'priv'),
+(7, 2, '11', '111');
 
 --
 -- Indexes for dumped tables
@@ -132,6 +175,20 @@ ALTER TABLE `person`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `persons_groups`
+--
+ALTER TABLE `persons_groups`
+  ADD PRIMARY KEY (`person_id`,`person_group_id`),
+  ADD KEY `IDX_85191A63217BBB47` (`person_id`),
+  ADD KEY `IDX_85191A636A127C70` (`person_group_id`);
+
+--
+-- Indexes for table `person_group`
+--
+ALTER TABLE `person_group`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `phone`
 --
 ALTER TABLE `phone`
@@ -146,22 +203,27 @@ ALTER TABLE `phone`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `email`
 --
 ALTER TABLE `email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `person_group`
+--
+ALTER TABLE `person_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `phone`
 --
 ALTER TABLE `phone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
@@ -177,6 +239,13 @@ ALTER TABLE `address`
 --
 ALTER TABLE `email`
   ADD CONSTRAINT `FK_E7927C74217BBB47` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
+
+--
+-- Constraints for table `persons_groups`
+--
+ALTER TABLE `persons_groups`
+  ADD CONSTRAINT `FK_85191A63217BBB47` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_85191A636A127C70` FOREIGN KEY (`person_group_id`) REFERENCES `person_group` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `phone`

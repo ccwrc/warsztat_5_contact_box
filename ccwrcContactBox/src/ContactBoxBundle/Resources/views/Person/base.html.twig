@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            <style>
+                body {
+                    background-image: url('https://images72.fotosik.pl/1031/2b8db97d9bad8d14gen.png');
+                }
+            </style>
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
             <!-- Latest compiled and minified CSS -->
@@ -22,8 +27,9 @@
                 <a href='{{ path("contactbox_person_index") }}' ><button class="btn btn-small">Strona główna</button> </a>
                 <a href='{{ path("contactbox_person_showallpersons") }}' ><button class="btn btn-small">Wyświetl kontakty</button> </a>
                 <a href='{{ path("contactbox_person_addperson") }}' ><button class="btn btn-small">Dodaj kontakt</button> </a>
+                <a href='{{ path("contactbox_persongroup_showallgroups") }}' ><button class="btn btn-small">Wyświetl grupy</button> </a>
                 <a href='{{ path("contactbox_persongroup_addgroup") }}' ><button class="btn btn-small">Dodaj grupę</button> </a>
-                <a href="https://github.com/ccwrc" target="_blank"><button class="btn btn-small">Test button</button> </a>
+                <a href="https://github.com/ccwrc" target="_blank"><button class="btn btn-small">destroy the world button</button> </a>
             {% endblock %}
         {% endblock %}
     {% block javascripts %}{% endblock %}

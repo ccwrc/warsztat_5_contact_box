@@ -4,13 +4,14 @@
 
 {% block body %} 
     <div class="container">
-
         {{ parent() }}   
-        <h3>{{ person.surname }} {{ person.name }} - dodaj nowy e-mail </h3>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <div class='input-group-addon'>
+            <h3>{{ person.surname }} {{ person.name }} - dodaj nowy e-mail </h3>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
 
     </div>
 {% endblock %}
