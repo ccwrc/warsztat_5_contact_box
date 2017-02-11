@@ -4,6 +4,7 @@
 
 {% block body %} 
     <div class="container">
+        
         {{ parent() }}   
         <h3>{{ person.surname }} {{ person.name }} - edytuj adres </h3>
 
@@ -11,5 +12,5 @@
         {{ form_widget(form) }}
         {{ form_end(form) }}
 
-        <div/>
+    </div>
 {% endblock %}
