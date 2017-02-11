@@ -19,8 +19,9 @@ class PersonController extends Controller {
      * @Route("/")
      */
     public function indexAction() {
-        // czasowo, planowana grafika powitalna
-        return $this->redirectToRoute("contactbox_person_showallpersons");
+        return $this->render('ContactBoxBundle:Person:index.html.twig', array(
+                        //
+        ));
     }
 
     /**

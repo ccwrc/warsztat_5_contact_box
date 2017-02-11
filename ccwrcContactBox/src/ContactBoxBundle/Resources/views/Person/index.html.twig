@@ -2,6 +2,24 @@
 
 {% block title %}ContactBoxBundle:Person:index{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Person:index page</h1>
-{% endblock %}
+{% block body %} 
+    <div class="container">
+        {{ parent() }}   
+
+        <h3>Działające funkcjonalności: </h3>
+        - wyświetlanie wszystkich osób (alfabetycznie wg. nazwiska), <br/>
+        - kazda osoba ma guzik do edycji i usunięcia, <br/>
+        - po kliknięciu w imię osoby jest dostęp do szczegółów, <br/>
+        - działa wyświetlanie wszystkich danych, <br/>
+        - działa link do edycji danych, <br/>
+        - działa usunięcie osoby (usuwanie ze wszystkimi adresami, telefonami i adresami e-mail), <br/>
+        - działa edycja danych, włącznie z dodawaniem/usuwaniem maili, adresów, telefonów, <br/>
+
+        <h3>Funkcjonalności do wprowadzenia:</h3>
+        - tworzenie grup, <br/>
+        - możliwość dodania osoby do wielu grup, <br/>
+        - strona wyświetlania grup, <br/>
+        - wyszukiwanie osób poi imieniu lub nazwisku, <br/>
+        
+        <div/>
+    {% endblock %}

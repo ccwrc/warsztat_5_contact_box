@@ -22,7 +22,7 @@
                     <td> {{ person.surname }} </td>
                     <td> {{ person.description }} </td>
                     <td> <a href='{{ path("contactbox_person_showperson", {"id": person.id}) }}' >
-                            <button class="btn btn-default btn-xs dropdown-toggle">Szczegóły</button> </a> 
+                            <button class="btn btn-default btn-xs dropdown-toggle">{{ person.name }}</button> </a> 
                         <a href='{{ path("contactbox_person_deleteperson", {"id": person.id}) }}' >
                             <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
                     </td>
