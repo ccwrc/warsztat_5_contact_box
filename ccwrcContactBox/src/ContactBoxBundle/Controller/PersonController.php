@@ -64,7 +64,7 @@ class PersonController extends Controller {
             $person = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("contactbox_person_showallpersons");
+            return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
         }
 
         return $this->render('ContactBoxBundle:Person:edit_person.html.twig', array(
@@ -130,6 +130,36 @@ class PersonController extends Controller {
         }
 
         return $this->render('ContactBoxBundle:Person:add_person.html.twig', array(
+                    "form" => $form->createView()
+        ));
+    }
+    
+    /**
+     * @Route("/findPerson")
+     */
+    public function findPersonAction(Request $req) {
+        $person = new Person();
+        $form = $this->createFormBuilder($person)
+                ->setMethod("POST")
+                ->add("name", "text", ["label" => "Podaj imię lub nazwisko: "])
+                ->add("save", "submit", ["label" => "Kliknij żeby wyszukać"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $findByNameOrSurname = $req->request->get("form")["name"];
+            $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE p.name = '
+                            . ':findByNameOrSurname OR p.surname = :findByNameOrSurname'
+                            . '')->setParameter('findByNameOrSurname', $findByNameOrSurname);
+            $persons = $query->getResult();
+
+            return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
+                        "persons" => $persons
+            ));
+        }
+
+        return $this->render('ContactBoxBundle:Person:find_person.html.twig', array(
                     "form" => $form->createView()
         ));
     }

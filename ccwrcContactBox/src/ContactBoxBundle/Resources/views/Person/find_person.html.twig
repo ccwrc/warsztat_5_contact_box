@@ -1,0 +1,17 @@
+{% extends "ContactBoxBundle:Person:base.html.twig" %}
+
+{% block title %}ContactBoxBundle:Person:findPerson{% endblock %}
+
+{% block body %} 
+    <div class="container">
+        {{ parent() }}
+
+        <div class='input-group-addon'>
+            <h3>Wyszukaj: </h3>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}
