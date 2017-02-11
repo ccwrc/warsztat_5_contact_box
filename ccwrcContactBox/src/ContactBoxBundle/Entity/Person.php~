@@ -63,6 +63,12 @@ class Person
      * @ORM\OneToMany(targetEntity="Phone", mappedBy="person", cascade={"remove"})
      */
     private $phones;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="PersonGroup", inversedBy="persons", cascade={"persist"})
+     * @ORM\JoinTable(name="persons_groups")
+     */
+    private $groups;
 
 
     /**
@@ -166,15 +172,15 @@ class Person
     {
         return $this->photo;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->addresses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->emails = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->phones = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+//    /**
+//     * Constructor
+//     */
+//    public function __construct()
+//    {
+//        $this->addresses = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->emails = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->phones = new \Doctrine\Common\Collections\ArrayCollection();
+//    }
 
     /**
      * Add addresses

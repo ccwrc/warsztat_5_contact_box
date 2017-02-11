@@ -63,6 +63,12 @@ class Person
      * @ORM\OneToMany(targetEntity="Phone", mappedBy="person", cascade={"remove"})
      */
     private $phones;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="PersonGroup", inversedBy="persons", cascade={"persist"})
+     * @ORM\JoinTable(name="persons_groups")
+     */
+    private $groups;
 
 
     /**
@@ -166,15 +172,6 @@ class Person
     {
         return $this->photo;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->addresses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->emails = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->phones = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add addresses
@@ -273,5 +270,48 @@ class Person
     public function getPhones()
     {
         return $this->phones;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->addresses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->emails = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->phones = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \ContactBoxBundle\Entity\PersonGroup $groups
+     * @return Person
+     */
+    public function addGroup(\ContactBoxBundle\Entity\PersonGroup $groups)
+    {
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \ContactBoxBundle\Entity\PersonGroup $groups
+     */
+    public function removeGroup(\ContactBoxBundle\Entity\PersonGroup $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }
