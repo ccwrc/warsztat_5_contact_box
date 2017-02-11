@@ -1,7 +1,15 @@
-{% extends "::base.html.twig" %}
+{% extends "ContactBoxBundle:Person:base.html.twig" %}
 
 {% block title %}ContactBoxBundle:PersonGroup:addGroup{% endblock %}
 
-{% block body %}
-<h1>Welcome to the PersonGroup:addGroup page</h1>
+{% block body %} 
+    <div class="container">
+        {{ parent() }}   
+        <h3>Dodaj nową grupę </h3>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <div/>
 {% endblock %}
