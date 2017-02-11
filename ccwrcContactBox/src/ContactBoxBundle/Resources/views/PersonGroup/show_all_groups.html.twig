@@ -5,23 +5,25 @@
 {% block body %}
     <div class='container'>     
         {{ parent() }}     
-        <h3>Liczba grup w skrzynce kontaktowej: {{ groups | length }}</h3>
 
+        <h3>Liczba grup w skrzynce kontaktowej: {{ groups | length }}</h3>
         <table class="table">
 
             <tr>
                 <th>L.P.</th>
                 <th>Nazwa grupy</th>
-                <th>Detale</th>
+                <th>Akcje</th>
             </tr>
             {% for group in groups %}
                 <tr><td>{{ group.id }} </td>
                     <td>  {{ group.name }} </td>
-                    {#                    <td> <a href='{{ path("contactbox_person_showperson", {"id": person.id}) }}' >
-                                                <button class="btn btn-default btn-xs dropdown-toggle">{{ person.name }}</button> </a> 
-                                            <a href='{{ path("contactbox_person_deleteperson", {"id": person.id}) }}' >
-                                                <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
-                                        </td>#}
+                    <td> <a href='{{ path("contactbox_person_showperson", {"id": group.id}) }}' >
+                            <button class="btn btn-default btn-xs dropdown-toggle">Wyświetl osoby</button> </a> 
+                        <a href='{{ path("contactbox_persongroup_editgroup", {"id": group.id}) }}' >
+                            <button class="btn btn-default btn-xs dropdown-toggle">Edytuj grupę</button> </a> 
+                        <a href='{{ path("contactbox_persongroup_deletegroup", {"id": group.id}) }}' >
+                            <button class="btn btn-default btn-xs dropdown-toggle">Usuń grupę</button> </a>
+                    </td>
                 </tr>
             {% else %}
                 Brak grup w bazie.

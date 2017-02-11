@@ -1,7 +1,17 @@
-{% extends "::base.html.twig" %}
+{% extends "ContactBoxBundle:Person:base.html.twig" %}
 
 {% block title %}ContactBoxBundle:PersonGroup:editGroup{% endblock %}
 
-{% block body %}
-<h1>Welcome to the PersonGroup:editGroup page</h1>
+{% block body %} 
+    <div class="container">
+        {{ parent() }}   
+        
+        <div class='input-group-addon'>
+            <h3>Edycja grupy </h3>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
 {% endblock %}

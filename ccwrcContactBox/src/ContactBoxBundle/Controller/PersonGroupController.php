@@ -11,7 +11,7 @@ use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\PersonGroup;
 
 class PersonGroupController extends Controller {
-    
+
     /**
      * @Route("/addGroup")
      */
@@ -51,23 +51,51 @@ class PersonGroupController extends Controller {
     }
 
     /**
-     * @Route("/editGroup")
+     * @Route("/{id}/editGroup", requirements={"id"="\d+"})
      */
-    public function editGroupAction()
-    {
+    public function editGroupAction(Request $req, $id) {
+        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup");
+        $group = $repo->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($group == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $form = $this->createFormBuilder($group)
+                ->setMethod("POST")
+                ->add("name", "text", ["label" => "Podaj nazwę grupy: "])
+                ->add("save", "submit", ["label" => "Kliknij żeby zapisać"])
+                ->getForm();
+
+        $form->handleRequest($req);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $group = $form->getData();
+            $em->flush();
+            return $this->redirectToRoute("contactbox_persongroup_showallgroups");
+        }
+
         return $this->render('ContactBoxBundle:PersonGroup:edit_group.html.twig', array(
-            // ...
+                    "form" => $form->createView()
         ));
     }
 
     /**
-     * @Route("/deleteGroup")
+     * @Route("/{id}/deleteGroup", requirements={"id"="\d+"})
      */
-    public function deleteGroupAction()
-    {
-        return $this->render('ContactBoxBundle:PersonGroup:delete_group.html.twig', array(
-            // ...
-        ));
+    public function deleteGroupAction($id) {
+        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup");
+        $em = $this->getDoctrine()->getManager();
+        $group = $repo->find($id);
+
+        if ($group == null) {
+            return $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $em->remove($group);
+        $em->flush();
+
+        return $this->redirectToRoute("contactbox_persongroup_showallgroups");
     }
 
 }

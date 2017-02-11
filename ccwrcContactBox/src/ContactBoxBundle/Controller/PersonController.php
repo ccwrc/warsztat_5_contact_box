@@ -19,15 +19,13 @@ class PersonController extends Controller {
      * @Route("/")
      */
     public function indexAction() {
-        return $this->render('ContactBoxBundle:Person:index.html.twig', array(
-                        //
-        ));
+        return $this->render('ContactBoxBundle:Person:index.html.twig');
     }
 
     /**
      * @Route("/{id}/deletePerson", requirements={"id"="\d+"})
      */
-    public function deletePersonAction(request $req, $id) {
+    public function deletePersonAction($id) {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
         $person = $repo->find($id);
 
