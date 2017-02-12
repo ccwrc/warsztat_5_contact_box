@@ -4,11 +4,8 @@ namespace ContactBoxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\PersonGroup;
 
 class PersonGroupController extends Controller {
@@ -98,7 +95,7 @@ class PersonGroupController extends Controller {
 
         return $this->redirectToRoute("contactbox_persongroup_showallgroups");
     }
-    
+
     /**
      * @Route("/{id}/{groupId}/addPersonToGroup", requirements={"id"="\d+", "groupId"="\d+"})
      */
@@ -131,10 +128,10 @@ class PersonGroupController extends Controller {
 
         $person->removeGroup($group);
         $em->flush();
-        
+
         return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
     }
-    
+
     /**
      * @Route("/{groupId}/findPersonsFromGroup", requirements={"groupId"="\d+"})
      */

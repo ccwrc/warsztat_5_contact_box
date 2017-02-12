@@ -4,10 +4,8 @@ namespace ContactBoxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
-use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\Address;
 
 class AddressController extends Controller {
@@ -40,7 +38,7 @@ class AddressController extends Controller {
             $em->persist($address);
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", [
-                        "id" => $person->getId()
+                        "id" => $id 
             ]);
         }
 
@@ -94,7 +92,7 @@ class AddressController extends Controller {
             $address = $form->getData();
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", [
-                        "id" => $person->getId()
+                        "id" => $id 
             ]);
         }
 

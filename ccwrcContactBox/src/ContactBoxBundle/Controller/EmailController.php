@@ -4,14 +4,12 @@ namespace ContactBoxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
-use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\Email;
 
-class EmailController extends Controller
-{
+class EmailController extends Controller {
+
     /**
      * @Route("/{id}/addEmail", requirements={"id"="\d+"})
      */
@@ -19,7 +17,7 @@ class EmailController extends Controller
         $em = $this->getDoctrine()->getManager();
         $email = new Email();
         $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
-        
+
         if ($person == null) {
             throw $this->createNotFoundException("Brak ID w bazie");
         }

@@ -4,14 +4,12 @@ namespace ContactBoxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
-use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\Phone;
 
-class PhoneController extends Controller
-{
+class PhoneController extends Controller {
+
     /**
      * @Route("/{id}/addPhone", requirements={"id"="\d+"})
      */

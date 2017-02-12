@@ -4,18 +4,12 @@ namespace ContactBoxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 use ContactBoxBundle\Entity\Person;
-use ContactBoxBundle\Entity\Address;
-use ContactBoxBundle\Entity\Email;
-use ContactBoxBundle\Entity\Phone;
-use ContactBoxBundle\Entity\PersonGroup;
 
 class PersonController extends Controller {
-    
+
     /**
      * @Route("/")
      */
@@ -37,7 +31,7 @@ class PersonController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->remove($person);
         $em->flush();
-        
+
         return $this->redirectToRoute("contactbox_person_showallpersons");
     }
 
@@ -94,7 +88,6 @@ class PersonController extends Controller {
      */
     public function showAllPersonsAction() {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
-        // $persons = $repo->findAll();
         $persons = $repo->findBy([], ["surname" => "ASC"]);
 
         if ($persons == null) {
@@ -105,7 +98,7 @@ class PersonController extends Controller {
                     "persons" => $persons
         ));
     }
-    
+
     /**
      * @Route("/addPerson")
      */
@@ -134,7 +127,7 @@ class PersonController extends Controller {
                     "form" => $form->createView()
         ));
     }
-    
+
     /**
      * @Route("/findPerson")
      */
@@ -164,7 +157,7 @@ class PersonController extends Controller {
                     "form" => $form->createView()
         ));
     }
-    
+
     /**
      * @Route("/addPersonToGroup/{id}", requirements={"id"="\d+"})
      */
@@ -177,16 +170,14 @@ class PersonController extends Controller {
                     "person" => $person
         ));
     }
-    
+
     /**
      * @Route("/deletePersonFromGroup/{id}", requirements={"id"="\d+"})
      */
     public function deletePersonFromGroupAction($id) {
-    //    $groups = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->findAll();
         $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
 
         return $this->render('ContactBoxBundle:PersonGroup:delete_person_from_group.html.twig', array(
-              //      "groups" => $groups,
                     "person" => $person
         ));
     }
