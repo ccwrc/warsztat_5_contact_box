@@ -107,6 +107,10 @@ class PersonGroupController extends Controller {
         if ($group == null || $person == null) {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
+   
+        if ($person->getGroups()->contains($group)) { 
+            return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
+        }
 
         $person->addGroup($group);
         $em->flush();
