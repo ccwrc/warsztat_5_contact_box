@@ -1,0 +1,21 @@
+{% extends "ContactBoxBundle:Person:base.html.twig" %}
+
+{% block title %}ContactBoxBundle:PersonGroup{% endblock %}
+
+{% block body %} 
+    <div class="container">
+        {{ parent() }}   
+
+        <div class='input-group-addon'>
+            <h3>Usuń {{ person.name }} {{ person.surname }} z grupy: </h3>
+
+            {% for group in person.groups %}
+                <a href="{{ path("contactbox_persongroup_deletepersonfromgroup", {"id":person.id, "groupId":group.id}) }}"><button class="btn btn-default btn-xs dropdown-toggle">{{ group.name }}</button></a><br/><br/>
+            {% else %}
+                Brak grup przypisanych do użytkownika
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}

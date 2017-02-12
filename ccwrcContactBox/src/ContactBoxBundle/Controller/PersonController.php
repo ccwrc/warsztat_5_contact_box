@@ -12,6 +12,7 @@ use ContactBoxBundle\Entity\Person;
 use ContactBoxBundle\Entity\Address;
 use ContactBoxBundle\Entity\Email;
 use ContactBoxBundle\Entity\Phone;
+use ContactBoxBundle\Entity\PersonGroup;
 
 class PersonController extends Controller {
     
@@ -164,5 +165,30 @@ class PersonController extends Controller {
         ));
     }
     
+    /**
+     * @Route("/addPersonToGroup/{id}", requirements={"id"="\d+"})
+     */
+    public function addPersonToGroupAction($id) {
+        $groups = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->findAll();
+        $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
+
+        return $this->render('ContactBoxBundle:PersonGroup:add_person_to_group.html.twig', array(
+                    "groups" => $groups,
+                    "person" => $person
+        ));
+    }
+    
+    /**
+     * @Route("/deletePersonFromGroup/{id}", requirements={"id"="\d+"})
+     */
+    public function deletePersonFromGroupAction($id) {
+    //    $groups = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->findAll();
+        $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
+
+        return $this->render('ContactBoxBundle:PersonGroup:delete_person_from_group.html.twig', array(
+              //      "groups" => $groups,
+                    "person" => $person
+        ));
+    }
 
 }

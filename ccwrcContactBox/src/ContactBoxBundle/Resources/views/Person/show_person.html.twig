@@ -16,7 +16,7 @@
             Opis: {{ person.description }} <br/> 
             Grupy: 
             {% for group in person.groups %}
-                {{ group.name }} 
+               { {{ group.name }} }
             {% else %}
                 Brak grup
             {% endfor %} <br/>
@@ -25,6 +25,11 @@
                 <button class="btn btn-default btn-xs dropdown-toggle">Edycja</button> </a>
             <a href='{{ path("contactbox_person_deleteperson", {"id": person.id}) }}' >
                 <button class="btn btn-default btn-xs dropdown-toggle">Usuń</button> </a>
+
+            <a href='{{ path('contactbox_person_addpersontogroup', {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Dodaj do grupy</button> </a>
+            <a href='{{ path('contactbox_person_deletepersonfromgroup', {"id": person.id}) }}' >
+                <button class="btn btn-default btn-xs dropdown-toggle">Usuń z grupy</button> </a>
             <br/><br/>
 
             <h4>Telefony:</h4>

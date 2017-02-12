@@ -113,9 +113,10 @@ class PersonGroupController extends Controller {
 
         $person->addGroup($group);
         $em->flush();
-        return new Response("sukces");
+
+        return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
     }
-    
+
     /**
      * @Route("/{id}/{groupId}/deletePersonFromGroup", requirements={"id"="\d+", "groupId"="\d+"})
      */
@@ -130,7 +131,21 @@ class PersonGroupController extends Controller {
 
         $person->removeGroup($group);
         $em->flush();
-        return new Response("sukces");
+        
+        return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
     }
+
+//    /**
+//     * @Route("/test/{id}")
+//     */
+//    public function testAction($id) {
+//        $groups = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->findAll();
+//        $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
+//
+//        return $this->render('ContactBoxBundle:PersonGroup:test_group.html.twig', array(
+//                    "groups" => $groups,
+//                    "person" => $person
+//        ));
+//    }
 
 }

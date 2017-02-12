@@ -1,0 +1,21 @@
+{% extends "ContactBoxBundle:Person:base.html.twig" %}
+
+{% block title %}ContactBoxBundle:PersonGroup{% endblock %}
+
+{% block body %} 
+    <div class="container">
+        {{ parent() }}   
+
+        <div class='input-group-addon'>
+            <h3>Dodaj {{ person.name }} {{ person.surname }} do grupy: </h3>
+
+            {% for group in groups %}
+                <a href="{{ path("contactbox_persongroup_addpersontogroup", {"id":person.id, "groupId":group.id}) }}"><button class="btn btn-default btn-xs dropdown-toggle">{{ group.name }}</button></a><br/><br/>
+            {% else %}
+                Brak grup w bazie
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}
