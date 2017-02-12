@@ -10,6 +10,6 @@ Prosta skrzynka kontaktowa. Projekt napisany przy użyciu Symfony 2.8
         - działa edycja danych, włącznie z dodawaniem/usuwaniem maili, adresów, telefonów, grup
         - tworzenie grup, 
         - strona wyświetlania/edycji grup, 
-        - wyświetlanie osbób z danej grupy,
+        - wyświetlanie osób z danej grupy,
         - możliwość dodania osoby do wielu grup, 
         - wyszukiwanie osób po imieniu lub nazwisku. 

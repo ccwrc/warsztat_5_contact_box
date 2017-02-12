@@ -66,4 +66,44 @@ class PersonGroup
     {
         return $this->name;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->persons = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add persons
+     *
+     * @param \ContactBoxBundle\Entity\Person $persons
+     * @return PersonGroup
+     */
+    public function addPerson(\ContactBoxBundle\Entity\Person $persons)
+    {
+        $this->persons[] = $persons;
+
+        return $this;
+    }
+
+    /**
+     * Remove persons
+     *
+     * @param \ContactBoxBundle\Entity\Person $persons
+     */
+    public function removePerson(\ContactBoxBundle\Entity\Person $persons)
+    {
+        $this->persons->removeElement($persons);
+    }
+
+    /**
+     * Get persons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
 }

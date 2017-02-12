@@ -24,14 +24,14 @@ class Phone
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string", length=100)
+     * @ORM\Column(name="number", type="string", length=150)
      */
     private $number;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=100)
+     * @ORM\Column(name="type", type="string", length=150)
      */
     private $type;
     

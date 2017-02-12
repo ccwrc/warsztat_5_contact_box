@@ -24,7 +24,7 @@ class PhoneController extends Controller {
 
         $form = $this->createFormBuilder($phone)
                 ->setMethod("POST")
-                ->add("number", "number", ["label" => "Podaj telefon: "])
+                ->add("number", "text", ["label" => "Podaj telefon: "])
                 ->add("type", "text", ["label" => "Typ telefonu: "])
                 ->add("save", "submit", ["label" => "Kliknij żeby dodać"])
                 ->getForm();
@@ -78,7 +78,7 @@ class PhoneController extends Controller {
 
         $form = $this->createFormBuilder($phone)
                 ->setMethod("POST")
-                ->add("number", "number", ["label" => "Podaj telefon: "])
+                ->add("number", "text", ["label" => "Podaj telefon: "])
                 ->add("type", "text", ["label" => "Typ telefonu: "])
                 ->add("save", "submit", ["label" => "Kliknij żeby zapisać"])
                 ->getForm();
