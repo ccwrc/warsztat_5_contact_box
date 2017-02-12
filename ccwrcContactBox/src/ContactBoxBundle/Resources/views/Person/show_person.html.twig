@@ -62,9 +62,9 @@
 
             <h4>Adresy:</h4>
             {% for address in person.addresses %} 
-                Miasto: {{ address.city }} 
+                Miasto: {{ address.city }},  
                 Ulica: {{ address.street }} <br>
-                Numer domu: {{ address.houseNumber }} 
+                Numer domu: {{ address.houseNumber }}, 
                 Numer mieszkania: {{ address.flatNumber }}  
                 <a href='{{ path("contactbox_address_editaddress", {"id": person.id, "addressId": address.id}) }}' >
                     <button class="btn btn-default btn-xs dropdown-toggle">Edytuj</button> </a>

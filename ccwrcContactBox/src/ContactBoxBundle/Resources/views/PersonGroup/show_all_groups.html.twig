@@ -17,7 +17,7 @@
             {% for group in groups %}
                 <tr><td>{{ group.id }} </td>
                     <td>  {{ group.name }} </td>
-                    <td> <a href='{{ path("contactbox_person_showperson", {"id": group.id}) }}' >
+                    <td> <a href='{{ path("contactbox_persongroup_findpersonsfromgroup", {"groupId": group.id}) }}' >
                             <button class="btn btn-default btn-xs dropdown-toggle">Wyświetl osoby</button> </a> 
                         <a href='{{ path("contactbox_persongroup_editgroup", {"id": group.id}) }}' >
                             <button class="btn btn-default btn-xs dropdown-toggle">Edytuj grupę</button> </a> 

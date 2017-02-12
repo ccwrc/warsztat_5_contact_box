@@ -90,7 +90,7 @@ class PersonGroupController extends Controller {
         $group = $repo->find($id);
 
         if ($group == null) {
-            return $this->createNotFoundException("Brak ID w bazie");
+            throw $this->createNotFoundException("Brak ID w bazie");
         }
 
         $em->remove($group);
@@ -108,7 +108,7 @@ class PersonGroupController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         if ($group == null || $person == null) {
-            return $this->createNotFoundException("Brak ID w bazie");
+            throw $this->createNotFoundException("Brak ID w bazie");
         }
 
         $person->addGroup($group);
@@ -126,7 +126,7 @@ class PersonGroupController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         if ($group == null || $person == null) {
-            return $this->createNotFoundException("Brak ID w bazie");
+            throw $this->createNotFoundException("Brak ID w bazie");
         }
 
         $person->removeGroup($group);
@@ -134,18 +134,25 @@ class PersonGroupController extends Controller {
         
         return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
     }
+    
+    /**
+     * @Route("/{groupId}/findPersonsFromGroup", requirements={"groupId"="\d+"})
+     */
+    public function findPersonsFromGroupAction($groupId) {
+        $em = $this->getDoctrine()->getManager();
+        $group = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->find($groupId);
 
-//    /**
-//     * @Route("/test/{id}")
-//     */
-//    public function testAction($id) {
-//        $groups = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->findAll();
-//        $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
-//
-//        return $this->render('ContactBoxBundle:PersonGroup:test_group.html.twig', array(
-//                    "groups" => $groups,
-//                    "person" => $person
-//        ));
-//    }
+        if ($group == null) {
+            throw $this->createNotFoundException("Brak ID w bazie");
+        }
+
+        $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE :groupId '
+                        . 'MEMBER OF p.groups')->setParameter('groupId', $groupId);
+        $persons = $query->getResult();
+
+        return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
+                    "persons" => $persons
+        ));
+    }
 
 }
