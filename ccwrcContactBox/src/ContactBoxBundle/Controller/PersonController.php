@@ -90,9 +90,9 @@ class PersonController extends Controller {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
         $persons = $repo->findBy([], ["surname" => "ASC"]);
 
-        if ($persons == null) {
-            throw $this->createNotFoundException("Brak osób w bazie");
-        }
+//        if ($persons == null) {  // zbędne
+//            throw $this->createNotFoundException("Brak osób w bazie");
+//        }
 
         return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
                     "persons" => $persons

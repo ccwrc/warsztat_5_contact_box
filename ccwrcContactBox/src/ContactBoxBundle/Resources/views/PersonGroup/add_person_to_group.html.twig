@@ -5,10 +5,10 @@
 {% block body %} 
     <div class="container">
         {{ parent() }}   
-
+        
         <div class='input-group-addon'>
-            <h3>Dodaj {{ person.name }} {{ person.surname }} do grupy: </h3>
-
+            
+            <h3>Dodaj {{ person.name }} {{ person.surname }} do grupy: </h3> 
             {% for group in groups %}
                 <a href="{{ path("contactbox_persongroup_addpersontogroup", {"id":person.id, "groupId":group.id}) }}">
                     <button class="btn btn-default btn-xs dropdown-toggle">{{ group.name }}</button></a><br/><br/>
