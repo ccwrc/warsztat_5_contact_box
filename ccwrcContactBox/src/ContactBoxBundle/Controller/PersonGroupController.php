@@ -99,7 +99,7 @@ class PersonGroupController extends Controller {
     /**
      * @Route("/{id}/{groupId}/addPersonToGroup", requirements={"id"="\d+", "groupId"="\d+"})
      */
-    Public function addPersonToGroupAction(Request $req, $id, $groupId) {
+    Public function addPersonToGroupAction($id, $groupId) {
         $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
         $group = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->find($groupId);
         $em = $this->getDoctrine()->getManager();
@@ -121,7 +121,7 @@ class PersonGroupController extends Controller {
     /**
      * @Route("/{id}/{groupId}/deletePersonFromGroup", requirements={"id"="\d+", "groupId"="\d+"})
      */
-    Public function deletePersonFromGroupAction(Request $req, $id, $groupId) {
+    Public function deletePersonFromGroupAction($id, $groupId) {
         $person = $this->getDoctrine()->getRepository("ContactBoxBundle:Person")->find($id);
         $group = $this->getDoctrine()->getRepository("ContactBoxBundle:PersonGroup")->find($groupId);
         $em = $this->getDoctrine()->getManager();
@@ -130,9 +130,12 @@ class PersonGroupController extends Controller {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
 
-        $person->removeGroup($group);
-        $em->flush();
-
+        if ($person->getGroups()->contains($group)) {
+            $person->removeGroup($group);
+            $em->flush();
+            return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
+        }
+        
         return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
     }
 
