@@ -112,6 +112,7 @@ class PersonGroupController extends Controller {
             return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
         }
 
+        $group->addPerson($person);
         $person->addGroup($group);
         $em->flush();
 
@@ -132,6 +133,7 @@ class PersonGroupController extends Controller {
 
         if ($person->getGroups()->contains($group)) {
             $person->removeGroup($group);
+            $group->removePerson($person);
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", ["id" => $id]);
         }
