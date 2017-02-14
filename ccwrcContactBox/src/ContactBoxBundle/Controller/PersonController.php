@@ -90,7 +90,7 @@ class PersonController extends Controller {
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
         $persons = $repo->findBy([], ["surname" => "ASC"]);
 
-//        if ($persons == null) {  // zbędne
+//        if ($persons == null) {  // zbędne i niepotrzebne, załatwione w widoku
 //            throw $this->createNotFoundException("Brak osób w bazie");
 //        }
 

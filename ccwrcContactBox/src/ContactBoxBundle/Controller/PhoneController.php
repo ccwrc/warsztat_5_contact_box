@@ -33,6 +33,7 @@ class PhoneController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $phone = $form->getData();
             $phone->setPerson($person);
+            $person->addPhone($phone);
             $em->persist($phone);
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", [
@@ -58,6 +59,7 @@ class PhoneController extends Controller {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
 
+        $person->removePhone($phone);
         $em->remove($phone);
         $em->flush();
 

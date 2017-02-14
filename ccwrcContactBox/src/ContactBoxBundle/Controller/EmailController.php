@@ -33,6 +33,7 @@ class EmailController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->getData();
             $email->setPerson($person);
+            $person->addEmail($email);
             $em->persist($email);
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", [
@@ -58,6 +59,7 @@ class EmailController extends Controller {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
 
+        $person->removeEmail($email);
         $em->remove($email);
         $em->flush();
 

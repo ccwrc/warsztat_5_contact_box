@@ -35,6 +35,7 @@ class AddressController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $address = $form->getData();
             $address->setPerson($person);
+            $person->addAddress($address);
             $em->persist($address);
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", [
@@ -60,6 +61,7 @@ class AddressController extends Controller {
             throw $this->createNotFoundException("Brak ID w bazie");
         }
 
+        $person->removeAddress($address);
         $em->remove($address);
         $em->flush();
 
