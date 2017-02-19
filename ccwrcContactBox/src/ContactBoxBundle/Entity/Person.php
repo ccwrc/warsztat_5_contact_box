@@ -69,6 +69,12 @@ class Person
      * @ORM\JoinTable(name="persons_groups")
      */
     private $groups;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="persons")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
 
     /**

@@ -71,5 +71,5 @@ fos_user:
     firewall_name: main
     user_class: ContactBoxBundle\Entity\User
     from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"    
+        address: ccwrctest@ccwrctest.pl
+        sender_name: ccwrctest   
