@@ -101,9 +101,10 @@ class PersonController extends Controller {
             ));
         }
 
-        $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
-        $persons = $repo->findBy([], ["surname" => "ASC"]);
-
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE p.user IS '
+                . 'NULL ORDER BY p.surname ASC');
+        $persons = $query->getResult();
 
         return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
                     "persons" => $persons
