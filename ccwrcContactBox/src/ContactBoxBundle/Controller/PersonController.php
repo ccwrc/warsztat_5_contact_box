@@ -93,7 +93,7 @@ class PersonController extends Controller {
             $userId = $user->getId();
             $em = $this->getDoctrine()->getManager();
             $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE p.user = '
-                            . ':userId')->setParameter('userId', $userId);
+                            . ':userId ORDER BY p.surname ASC')->setParameter('userId', $userId);
             $persons = $query->getResult();
 
             return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(

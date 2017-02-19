@@ -30,7 +30,14 @@
                 <a href='{{ path("contactbox_person_findperson") }}' ><button class="btn btn-small">Wyszukaj osobę</button> </a>
                 <a href='{{ path("contactbox_persongroup_showallgroups") }}' ><button class="btn btn-small">Wyświetl grupy</button> </a>
                 <a href='{{ path("contactbox_persongroup_addgroup") }}' ><button class="btn btn-small">Dodaj grupę</button> </a>
-                <a href="https://github.com/ccwrc" target="_blank"><button class="btn btn-small">destroy the world button</button> </a>
+                <a href="https://github.com/ccwrc" target="_blank"><button class="btn btn-small">destroy the world</button> </a>
+
+                {% if is_granted('ROLE_USER') %}
+                    <a href='{{ path("fos_user_security_logout") }}' ><button class="btn btn-small">Wyloguj</button> </a>
+                {% else %}
+                    <a href='{{ path("fos_user_security_login") }}' ><button class="btn btn-small">Zaloguj</button> </a>
+                {% endif %}
+
             {% endblock %}
         {% endblock %}
     {% block javascripts %}{% endblock %}
