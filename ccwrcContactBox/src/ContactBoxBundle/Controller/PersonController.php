@@ -87,12 +87,23 @@ class PersonController extends Controller {
      * @Route("/showAllPersons")
      */
     public function showAllPersonsAction() {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if (!is_string($user)) {
+            $userId = $user->getId();
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery('SELECT p FROM ContactBoxBundle:Person p WHERE p.user = '
+                            . ':userId')->setParameter('userId', $userId);
+            $persons = $query->getResult();
+
+            return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
+                        "persons" => $persons
+            ));
+        }
+
         $repo = $this->getDoctrine()->getRepository("ContactBoxBundle:Person");
         $persons = $repo->findBy([], ["surname" => "ASC"]);
 
-//        if ($persons == null) {  // zbędne i niepotrzebne, załatwione w widoku
-//            throw $this->createNotFoundException("Brak osób w bazie");
-//        }
 
         return $this->render('ContactBoxBundle:Person:show_all_persons.html.twig', array(
                     "persons" => $persons
@@ -116,6 +127,13 @@ class PersonController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $person = $form->getData();
             $em = $this->getDoctrine()->getManager();
+            $user = $this->container->get('security.context')->getToken()->getUser();
+
+            if (is_string($user)) {
+                $user = null;
+            }
+            $person->setUser($user);
+
             $em->persist($person);
             $em->flush();
             return $this->redirectToRoute("contactbox_person_showperson", [

@@ -320,4 +320,27 @@ class Person
     {
         return $this->groups;
     }
+
+    /**
+     * Set user
+     *
+     * @param \ContactBoxBundle\Entity\User $user
+     * @return Person
+     */
+    public function setUser(\ContactBoxBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ContactBoxBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
