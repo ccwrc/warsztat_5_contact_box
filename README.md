@@ -14,3 +14,6 @@ Prosta skrzynka kontaktowa. Projekt napisany przy użyciu Symfony 2.8
         - możliwość dodania osoby do wielu grup, 
         - wyszukiwanie osób po imieniu lub nazwisku,
         - możliwość logowania/rejestracji i zarządzania swoimi kontaktami.
+
+Roboczy zrzut ekranu:
+![Alt text](https://images85.fotosik.pl/20/7f8fdc4f6afae063.png "Funky_Koval")
